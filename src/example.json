@@ -1,23 +1,14 @@
 [
-    {
+   {
         "id": "1",
-        "title": "Alien",
-        "year": "1979",
-        "director": "Ridley Scott",
-        "rating": "8.5"
-    },
-    {
+        "username": "DanSans",
+        "password": "password",
+        "email": "DanSans@gmail.com"
+   },
+   {
         "id": "2",
-        "title": "Blade Runner",
-        "year": "1982",
-        "director": "Ridley Scott",
-        "rating": "8.5"
-    },
-    {
-        "id": "3",
-        "title": "Blade Runner 2049",
-        "year": "2017",
-        "director": "Denis Villeneuve",
-        "rating": "8.5"
-    }
+        "username": "DanSans2",
+        "password": "password",
+        "email": "DanSans2@gmail.com"
+   }
 ]
