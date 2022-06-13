@@ -4,13 +4,15 @@
          "name": "Parque Acuatico los Chorros",
          "description": "Balneario con piscinas y nacimiento de agua dulce",
          "ubication": "Parque Recreativo Los Chorros, Parque Los Chorros, CA 1W, San Salvador",
-         "image": "https://lh4.googleusercontent.com/-hO2I5p-wseo/UzW8qgfQzWI/AAAAAAAAEII/tIpfN6RPQp0/s480/turicentro-los-chorros-la-libertad.jpg"
+         "image": "https://lh4.googleusercontent.com/-hO2I5p-wseo/UzW8qgfQzWI/AAAAAAAAEII/tIpfN6RPQp0/s480/turicentro-los-chorros-la-libertad.jpg",
+         "rating": 5
     },
     {
      "id": "2",
      "name": "centro historico de san salvador",
      "description": "El centro histórico de San Salvador comprende el área donde se inició la expansión de la ciudad capital de El Salvador desde el siglo XVI.",
      "ubication": "Centro Histórico de SS, San Salvador",
-     "image": "https://i.ytimg.com/vi/2PWSZ8_eyOM/maxresdefault.jpg"
+     "image": "https://i.ytimg.com/vi/2PWSZ8_eyOM/maxresdefault.jpg",
+     "rating": 4
    }
- ]
+]

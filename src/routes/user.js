@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
 
 //post
 router.post('/', (req, res) => {
-    const { id, username, email, password } = req.body;
-    if(id && username && email && password) {
+    const { id, name, nickname, email, password } = req.body;
+    if(id && name && nickname && email && password) {
         const id = users.length + 1;
         const newUser = {...req.body, id};
         console.log(newUser);
@@ -41,11 +41,12 @@ router.delete('/:id', (req, res) => {
 //put
 router.put('/:id', (req, res) => {
     const { id } = req.params;
-    const { username , email , password } = req.body;
-    if(id && username && email && password){
+    const { name, nickname , email , password } = req.body;
+    if(id && nickname && email && password){
         _.each(users, (user, index) => {
             if(user.id == id){
-                user.username = username;
+                user.name = name;
+                user.nickname = nickname;
                 user.email = email;
                 user.password = password;
             }

@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
 );
 //post
 router.post('/', (req, res) => {
-    const { id, name, description, ubication, image } = req.body;
-    if(id && name && description && ubication && image) {
+    const { id, name, description, ubication, image, rating } = req.body;
+    if(id && name && description && ubication && image && rating) {
         const id = destinations.length + 1;
         const newDestination = {...req.body, id};
         console.log(newDestination);
@@ -27,14 +27,15 @@ router.post('/', (req, res) => {
 //put
 router.put('/', (req, res) => {
     const { id } = req.params;
-    const { name , description , ubication , image } = req.body;
-    if(id && name && description && ubication && image){
+    const { name , description , ubication , image, rating } = req.body;
+    if(id && name && description && ubication && image && rating){
         _.each(destinations, (destination, index) => {
             if(destination.id == id){
                 destination.name = name;
                 destination.description = description;
                 destination.ubication = ubication;
                 destination.image = image;
+                destination.rating = rating;
             }
         });
         res.json(destinations);

@@ -1,13 +1,15 @@
 [
    {
         "id": "1",
-        "username": "DanSans",
+        "name": "Andres",
+        "nickname": "DanSans",
         "password": "password",
         "email": "DanSans@gmail.com"
    },
    {
         "id": "2",
-        "username": "DanSans2",
+        "name": "Ricardo",
+        "nickname": "DanSans2",
         "password": "password",
         "email": "DanSans2@gmail.com"
    }
