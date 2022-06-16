@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 //import routes
 const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
+const destinationsRouter = require('./routes/destinations');
 const app = express();
 dotenv.config();
 
@@ -26,6 +28,9 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/destinations', destinationsRouter);
+
 
 app.listen(3000 , () =>{
     console.log('Server on port 3000');

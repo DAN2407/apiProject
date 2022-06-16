@@ -5,9 +5,8 @@ const destinationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        required: true
+    photo :{
+        type: [String]
     },
     description: {
         type: String,
