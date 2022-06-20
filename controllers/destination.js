@@ -1,6 +1,6 @@
-import Destination from '../models/destination';
+const destinationModel = require('../models/destination');
 
-export const createDestination = async (req, res, next) => {
+exports.createDestination = async (req, res, next) => {
     const newDestination = new Destination(req.body);
     try{
         const savedDestination = await newDestination.save();
@@ -10,7 +10,7 @@ export const createDestination = async (req, res, next) => {
     }
 }
 
-export const getDestinations = async (req, res, next) => {
+exports.getDestinations = async (req, res, next) => {
     try{
         const destinations = await Destination.find();
         res.status(200).json(destinations);
@@ -19,7 +19,7 @@ export const getDestinations = async (req, res, next) => {
     }
 }
 
-export const deleteDestination = async (req, res, next) => {
+exports.deleteDestination = async (req, res, next) => {
     try{
         const deletedDestination = await Destination.findByIdAndDelete(req.params.id);
         res.status(200).json(deletedDestination);
@@ -28,7 +28,7 @@ export const deleteDestination = async (req, res, next) => {
     }
 }
 
-export const getAllDestinations = async (req, res, next) => {
+exports.getAllDestinations = async (req, res, next) => {
     try{
         const destinations = await Destination.find();
         res.status(200).json(destinations);
@@ -37,7 +37,7 @@ export const getAllDestinations = async (req, res, next) => {
     }
 }
 
-export const updateDestination = async (req, res, next) => {
+exports.updateDestination = async (req, res, next) => {
     try{
         const updatedDestination = await Destination.findByIdAndUpdate(
             req.params.id, 
@@ -49,3 +49,5 @@ export const updateDestination = async (req, res, next) => {
         next(error);
     }
 } 
+
+

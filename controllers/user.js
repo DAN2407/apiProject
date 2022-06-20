@@ -1,6 +1,6 @@
-const User = require('../models/user');
+const UserModel = require('../models/user');
 
-export const updateUser = async (req, res, next) => {
+exports.updateUser = async (req, res, next) => {
     try{
         const updateUser = await User.findByIdAndUpdate(
             req.params.id, 
@@ -14,7 +14,7 @@ export const updateUser = async (req, res, next) => {
     }
 }
 
-export const deleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
     try{
         const deleteUser = await User.findByIdAndDelete(req.params.id);
 
@@ -24,7 +24,7 @@ export const deleteUser = async (req, res, next) => {
     }
 }
 
-export const getUser = async (req, res, next) => {
+exports.getUser = async (req, res, next) => {
     try{
         const user = await User.findById(req.params.id);
 
@@ -34,12 +34,22 @@ export const getUser = async (req, res, next) => {
     }
 }
 
-export const getAllUsers = async (req, res, next) => {
+exports.getAllUsers = async (req, res, next) => {
     try{
         const users = await User.find();
 
         res.status(200).json(users);
     } catch (error) {
+        next(error);
+    }
+}
+
+exports.createUser = async (req, res, next) => {
+    const newUser = new User(req.body);
+    try{
+        const savedUser = await newUser.save();
+        res.status(200).json(savedUser);
+    }catch (error) {
         next(error);
     }
 }
