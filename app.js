@@ -3,12 +3,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var helmet = require("helmet");
+var passport = require("passport");
 
 var app = express();
 var userRouter = require("./routers/user");
 var destinationRouter = require("./routers/destination");
-var passport = require("passport");
-authRouter = require("./routers/auth");
+var authRouter = require("./routers/auth");
 app.use(logger("dev"));
 app.use(helmet());
 app.use(express.json());

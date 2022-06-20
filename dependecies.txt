@@ -1,0 +1,4 @@
+npm install
+npm i --dev nodemon
+npm i bcrypt cookie-parser debug express helmet jsonwebtoken mongoose morgan passport passport-jwt passport-local
+ 
