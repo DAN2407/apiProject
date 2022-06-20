@@ -7,7 +7,7 @@ var router = express.Router();
 router.post('/register', createUser);
 router.post('/login', async (req, res, next) => {
     try {
-      let { username, password } = req.body; //TODO: Add email 
+      let { username, password } = req.body; 
       let user = await UserModel.findOne({ username });
       if (!user)
         return res.status(400).send({
