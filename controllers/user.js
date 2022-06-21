@@ -5,7 +5,7 @@ exports.updateUser = async (req, res, next) => {
 
       let usernameToUpdate = req.params.username;
 
-      let { username, name, lastName } = req.body; 
+      let { username, name, email } = req.body; 
       let user = await UserModel.findOne({ username: usernameToUpdate });
   
       if (!user)
@@ -34,7 +34,7 @@ exports.updateUser = async (req, res, next) => {
     }
   };
 
-  exports.deleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
     try {
       let username = req.params.username;
       let { deletedCount } = await UserModel.deleteOne({ username });

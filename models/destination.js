@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const destinationSchema = new mongoose.Schema({
+const DestinationSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     photo :{
         type: [String]
@@ -33,5 +34,6 @@ const destinationSchema = new mongoose.Schema({
 }
 );
 
-const destinationModel = mongoose.model('destination', destinationSchema);
-module.exports = destinationModel;
+const DestinationModel = mongoose.model('destination', DestinationSchema);
+
+module.exports = DestinationModel;

@@ -1,36 +1,36 @@
-const destinationModel = require('../models/destination');
+const DestinationModel = require('../models/destination');
 
 exports.createDestination = async (req, res, next) => {
     try{
         let { name, description, ubication, rating, photo, reviews } = req.body;
-        let newDestination = await destinationModel.create({
+        let newDestination = await DestinationModel.create({
             name, 
             description, 
             ubication, 
             rating, 
-            photo, 
+            photo,
             reviews
         });
         res.send({newDestination});
     } catch (err) {
         next(err);
     }
-}
+};
 
 exports.getDestination = async (req, res, next) => {
     try{
         let name = req.params.name;
-        let destination = await destinationModel.findOne({name});
-        if(!destination){
+        let destination = await DestinationModel.findOne({ name }, "-");
+        if (!destination) {
             return res.status(404).send({
-                message: "Destination not found"
+                message: "destination not found",
             });
         }
-        res.send({destination});
+        res.send({ destination });
     } catch (err) {
         next(err);
     }
-}
+};
 
 exports.deleteDestination = async (req, res, next) => {
     try{
@@ -48,14 +48,14 @@ exports.deleteDestination = async (req, res, next) => {
         next(error);
 
     }
-}
+};
 
 exports.updateDestination = async (req, res, next) => {
     try{
         let destinationToUpdate = req.params.name;
 
         let { name, description, ubication, rating, photo, reviews } = req.body;
-        let destination = await destinationModel.findOne({ name: destinationToUpdate });
+        let destination = await DestinationModel.findOne({ name: destinationToUpdate });
         
         if (!destination)
             return res.status(400).send({
@@ -85,6 +85,6 @@ exports.updateDestination = async (req, res, next) => {
         next(err);
     }
 
-} 
+} ;
 
 
