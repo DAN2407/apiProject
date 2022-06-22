@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       - MONGO_URI=mongodb://mongo:27017/travelApi
-      - DEBUG=dummyDictionary:*
+      - DEBUG=travelApi:*
       - JWT_SECRET=Awerqw@#$$WER!@#$$!@%ETWEQR@!!asda123
     build: .
     ports:
