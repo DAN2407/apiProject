@@ -68,18 +68,27 @@ exports.getUser = async (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
     try {
-        //TODO: Requiere validation
         let { username, name, email, password, image } = req.body;
-        let newUser = await UserModel.create({
-          username,
-          name,
-          email,
-          password,
-          image
-        });
-        newUser.password = null;
-        res.send({ newUser });
-      } catch (err) {
+        //Validation
+        if (!username || !name || !email || !password ) {
+            return res.status(400).send({
+                message: "Please fill all the fields",
+            });
+        }else{
+            let user = new UserModel.create({
+                username,
+                name,
+                email,
+                password,
+                image,
+            });
+            let newUser = await user.save();
+            res.send({
+                message: "User created",
+                newUser
+            });
+        }
+    } catch (err) {
         next(err);
-      }
+    }
 };

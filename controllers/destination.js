@@ -3,15 +3,26 @@ const DestinationModel = require('../models/destination');
 exports.createDestination = async (req, res, next) => {
     try{
         let { name, description, ubication, rating, photo, reviews } = req.body;
-        let newDestination = await DestinationModel.create({
-            name, 
-            description, 
-            ubication, 
-            rating, 
-            photo,
-            reviews
-        });
-        res.send({newDestination});
+        //validate the data
+         if (!name || !description || !ubication || !rating ) {
+            return res.status(400).send({
+                message: "Please fill all the fields",
+           });
+        }else{
+            let destination = new DestinationModel.create({
+                name,
+                description,
+                ubication,
+                rating,
+                photo,
+                reviews
+            });
+            let newDestination = await destination.save();
+            res.send({
+                message: "Destination created",
+                newDestination,
+            });
+        }
     } catch (err) {
         next(err);
     }
@@ -19,23 +30,29 @@ exports.createDestination = async (req, res, next) => {
 
 exports.getDestination = async (req, res, next) => {
     try{
-        let name = req.params.name;
-        let destination = await DestinationModel.findOne({ name }, "-");
-        if (!destination) {
+        let destination = req.params.name;
+        let destinationToGet = await DestinationModel.findOne({ name: destination });
+        if (!destinationToGet) {
             return res.status(404).send({
-                message: "destination not found",
+                message: "Destination not found",
+            });
+        
+        }else{
+            res.send({
+                message: "Destination found",
+                destinationToGet,
             });
         }
-        res.send({ destination });
     } catch (err) {
         next(err);
+
     }
 };
 
 exports.deleteDestination = async (req, res, next) => {
     try{
         let destination = req.params.id;
-        let { deleteCount } = await Destination.deleteOne({ _id: destination });
+        let { deleteCount } = await DestinationModel.deleteOne({ _id: destination });
         if (deleteCount == 1) {
             return res.send({
                 message: "Destination deleted",

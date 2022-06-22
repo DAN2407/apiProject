@@ -10,4 +10,4 @@ mongoose
     (err) => {
       debug("Error to connect to database %o", err);
     }
-  );
+);

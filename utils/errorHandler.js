@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
         message: "Duplicate key",
       });
     }
-    // Monggose model
+    // Mongoose model
     if (err.errors) {
       var detailErrors = [];
       Object.values(err.errors).map(({ message, kind, path, value }) => {

@@ -9,6 +9,7 @@ var app = express();
 var userRouter = require("./routers/user");
 var destinationRouter = require("./routers/destination");
 var authRouter = require("./routers/auth");
+
 app.use(logger("dev"));
 app.use(helmet());
 app.use(express.json());
