@@ -66,27 +66,30 @@ exports.getUser = async (req, res, next) => {
     }
   };
 
+exports.getAllUsers = async (req, res, next) => {
+    try {
+      let users = await UserModel.find({}, "-password");
+      res.send({ users });
+    } catch (err) {
+      next(err);
+    }
+}
+
 exports.createUser = async (req, res, next) => {
     try {
         let { username, name, email, password, image } = req.body;
         //Validation
         if (!username || !name || !email || !password ) {
-            return res.status(400).send({
-                message: "Please fill all the fields",
-            });
+            return res.status(400).send({message: "Please fill all the fields"         });
         }else{
-            let user = new UserModel.create({
+            let newUser = await UserModel.create({
                 username,
                 name,
                 email,
                 password,
                 image,
             });
-            let newUser = await user.save();
-            res.send({
-                message: "User created",
-                newUser
-            });
+            res.send({newUser});
         }
     } catch (err) {
         next(err);

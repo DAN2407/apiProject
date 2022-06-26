@@ -2,14 +2,16 @@ var {
     createDestination,
     getDestination,
     deleteDestination,
-    updateDestination
-}=require('../controllers/destination');
+    updateDestination,
+    getAllDestinations,
+} = require('../controllers/destination');
 var express = require('express');
 var router = express.Router();
 
-router.get ('/', getDestination);
+router.get ('/:name', getDestination);
+router.get ('/', getAllDestinations);
 router.post('/', createDestination);
-router.delete('/:id', deleteDestination);
-router.put('/:id', updateDestination);
+router.delete('/:destination', deleteDestination);
+router.put('/:destination', updateDestination);
 
 module.exports = router;

@@ -19,15 +19,12 @@ const DestinationSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        min: 0,
-        max: 5,
+        required: true
     },
-    reviews: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Review'
-    }]
-    
-
+    category: {
+        type: String,
+        required: true
+    }
 },
 {
     timestamps: true

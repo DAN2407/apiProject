@@ -2,57 +2,57 @@ const DestinationModel = require('../models/destination');
 
 exports.createDestination = async (req, res, next) => {
     try{
-        let { name, description, ubication, rating, photo, reviews } = req.body;
+        let { name, description, ubication, photo, rating, category } = req.body;
         //validate the data
-         if (!name || !description || !ubication || !rating ) {
+         if (!name || !description || !ubication ) {
             return res.status(400).send({
                 message: "Please fill all the fields",
            });
         }else{
-            let destination = new DestinationModel.create({
+            let newDestination = new DestinationModel.create({
                 name,
                 description,
                 ubication,
                 rating,
                 photo,
-                reviews
+                category
             });
-            let newDestination = await destination.save();
-            res.send({
-                message: "Destination created",
-                newDestination,
-            });
+            res.send({ newDestination});
         }
     } catch (err) {
         next(err);
     }
 };
 
-exports.getDestination = async (req, res, next) => {
+exports.getAllDestinations = async (req, res, next) => {
     try{
-        let destination = req.params.name;
-        let destinationToGet = await DestinationModel.findOne({ name: destination });
-        if (!destinationToGet) {
-            return res.status(404).send({
-                message: "Destination not found",
-            });
-        
-        }else{
-            res.send({
-                message: "Destination found",
-                destinationToGet,
-            });
-        }
+        let destinations = await DestinationModel.find({});
+        res.send({ destinations });
     } catch (err) {
         next(err);
-
     }
+}
+
+exports.getDestination = async (req, res, next) => {
+    try{
+        let name = req.params.name;
+        let destinationToGet = await DestinationModel.findOne({ name });
+        if (!destinationToGet) {
+            return res.status(404).send({
+                message: "destination not found",
+              });
+        }
+        res.send({data: destinationToGet });
+    } catch (err) {
+        next(err);
+    }
+    
 };
 
 exports.deleteDestination = async (req, res, next) => {
     try{
         let destination = req.params.id;
-        let { deleteCount } = await DestinationModel.deleteOne({ _id: destination });
+        let { deleteCount } = await DestinationModel.deleteOne({ destination });
         if (deleteCount == 1) {
             return res.send({
                 message: "Destination deleted",
@@ -71,7 +71,7 @@ exports.updateDestination = async (req, res, next) => {
     try{
         let destinationToUpdate = req.params.name;
 
-        let { name, description, ubication, rating, photo, reviews } = req.body;
+        let { name, description, ubication, rating, photo, category } = req.body;
         let destination = await DestinationModel.findOne({ name: destinationToUpdate });
         
         if (!destination)
@@ -82,16 +82,17 @@ exports.updateDestination = async (req, res, next) => {
         destination.name = name;
         destination.description = description;
         destination.ubication = ubication;
-        destination.rating = rating;
         destination.photo = photo;
-        destination.reviews = reviews;
+        destination.rating = rating;
+        destination.category = category;
+
 
         let updatedDestination = await destination.save();
 
         if (destination == updatedDestination) {
             return res.send({
                 message: "Destination is updated",
-                destination: { name, description, ubication, rating, photo, reviews},
+                destination: { name, description, ubication, photo},
             });
     }
         res.send({

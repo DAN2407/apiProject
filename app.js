@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-passport.authenticate("jwt", { session: false });
 app.use("/users", userRouter);
 app.use("/destinations", destinationRouter);
 app.use(authRouter);
