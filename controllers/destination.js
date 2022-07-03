@@ -92,7 +92,7 @@ exports.updateDestination = async (req, res, next) => {
         if (destination == updatedDestination) {
             return res.send({
                 message: "Destination is updated",
-                destination: { name, description, ubication, photo},
+                destination: { name, description, ubication, photo, category},
             });
     }
         res.send({

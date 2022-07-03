@@ -3,12 +3,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var helmet = require("helmet");
-var passport = require("passport");
-
-var app = express();
 var userRouter = require("./routers/user");
 var destinationRouter = require("./routers/destination");
 var authRouter = require("./routers/auth");
+var passport = require("passport");
+var errorHandler = require("./utils/errorHandler");
+require("./database/config");
+require("./auth/auth");
+
+var app = express();
 
 app.use(logger("dev"));
 app.use(helmet());
@@ -17,10 +20,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(authRouter);
+app.use(passport.authenticate("jwt", { session: false }));
 app.use("/users", userRouter);
 app.use("/destinations", destinationRouter);
-app.use(authRouter);
-
-
+app.use(errorHandler);
 
 module.exports = app;
