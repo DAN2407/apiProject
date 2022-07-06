@@ -77,9 +77,9 @@ exports.getAllUsers = async (req, res, next) => {
 
 exports.createUser = async (req, res, next) => {
     try {
-        let { username, name, email, password, image } = req.body;
+        let { username, name, email, password, image, role } = req.body;
         //Validation
-        if (!username || !name || !email || !password ) {
+        if (!username || !name || !email || !password || !role ) {
             return res.status(400).send({message: "Please fill all the fields"         });
         }else{
             let newUser = await UserModel.create({
@@ -88,6 +88,7 @@ exports.createUser = async (req, res, next) => {
                 email,
                 password,
                 image,
+                role
             });
             res.send({newUser});
         }
@@ -95,3 +96,4 @@ exports.createUser = async (req, res, next) => {
         next(err);
     }
 };
+

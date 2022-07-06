@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -22,9 +23,10 @@ const UserSchema = new mongoose.Schema({
     image: {
         type: String
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    role: {
+        type: String,
+        default: "user",
+        required: true
     }
 },
 {
@@ -32,8 +34,24 @@ const UserSchema = new mongoose.Schema({
 }
 );
 
+UserSchema.pre("save", async function (next) {
+    const user = this;
+    const hash = await bcrypt.hash(user.password, 10);
+    user.password = hash;
+    next();
+});
+
+
+UserSchema.methods.isValidPassword = async function (password) {
+    const user = this;
+    const compare = await bcrypt.compare(password, user.password);
+    return compare;
+};
+
+//is Admin method extended from UserSchema
+
+
 
 
 const UserModel = mongoose.model("user", UserSchema);
-
 module.exports = UserModel;

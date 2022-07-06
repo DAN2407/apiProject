@@ -9,7 +9,7 @@ exports.createDestination = async (req, res, next) => {
                 message: "Please fill all the fields",
            });
         }else{
-            let newDestination = new DestinationModel.create({
+            let newDestination = await DestinationModel.create({
                 name,
                 description,
                 ubication,

@@ -22,8 +22,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(authRouter);
 app.use(passport.authenticate("jwt", { session: false }));
-app.use("/users", userRouter);
-app.use("/destinations", destinationRouter);
+app.use("/api/users", userRouter);
+app.use("/api/destinations", destinationRouter);
 app.use(errorHandler);
+
 
 module.exports = app;

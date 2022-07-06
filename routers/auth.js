@@ -13,20 +13,20 @@ router.post('/login', async (req, res, next) => {
         return res.status(400).send({
           message: "User not found",
         });
-      let validPassword = await user.isValidPassword(password);
-      if (!validPassword)
-        return res.status(400).send({
-          message: "Wrong password",
-        });
-      let body = { _id: user._id, email: user.email };
-      let token = jwt.sign(
-        { user: body },
-        process.env.JWT_SECRET || "TOP_SECRET"
-      );
-      return res.json({ token });
-    } catch (err) {
-      next(err);
-    }
-  });
-  
-  module.exports = router;
+        let validPassword = await user.isValidPassword(password);
+        if (!validPassword)
+          return res.status(400).send({
+            message: "Wrong password",
+          });
+          let body = { _id: user._id, password: user.password };
+          let token = jwt.sign(
+            { user: body },
+            process.env.JWT_SECRET || "TOP_SECRET"
+          );
+          return res.json({ token });
+        } catch (err) {
+          next(err);
+        }
+      });  
+
+module.exports = router;

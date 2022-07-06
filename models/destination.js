@@ -7,7 +7,8 @@ const DestinationSchema = new mongoose.Schema({
         unique: true
     },
     photo :{
-        type: [String]
+        type: String,
+        required: false
     },
     description: {
         type: String,
